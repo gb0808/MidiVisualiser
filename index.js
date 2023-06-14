@@ -35,7 +35,6 @@ function failure() {
 function parseInput(input) {
     const message = new MIDIMessage(input.data[0], input.data[1], input.data[2]);
     const midiIcon = document.getElementById(AudioStream.noteValues[message.getNote()]);
-    const noteIcon = document.getElementById("note");
     console.log(message.toString());
     
     if (message.checkNoteStatus()) {
