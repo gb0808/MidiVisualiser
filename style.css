@@ -1,0 +1,15 @@
+body {
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    padding-top: 10%;
+    padding-left: 5%;
+    padding-right: 5%;
+}
+
+.midiBlock {
+    text-align: center;
+    padding: 10px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #000000;
+}
