@@ -35,13 +35,16 @@ function failure() {
 function parseInput(input) {
     const message = new MIDIMessage(input.data[0], input.data[1], input.data[2]);
     const midiIcon = document.getElementById(AudioStream.noteValues[message.getNote()]);
+    const noteIcon = document.getElementById("note");
     console.log(message.toString());
     
     if (message.checkNoteStatus()) {
         AudioStream.startSound(message);
         midiIcon.style.backgroundColor = "aqua";
+        NoteVisualiser.showNote(message);
     } else {
         AudioStream.stopSound(message);
         midiIcon.style.backgroundColor = "white";
+        NoteVisualiser.hideNote();
     }
 }

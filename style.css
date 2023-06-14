@@ -1,7 +1,7 @@
-body {
+.midiContainer {
     display: grid;
     grid-template-columns: repeat(12, auto);
-    padding-top: 10%;
+    padding-top: 20px;
     padding-left: 5%;
     padding-right: 5%;
 }
@@ -12,4 +12,25 @@ body {
     border-style: solid;
     border-width: 1px;
     border-color: #000000;
+}
+
+.staffContainer {
+    padding: 20px;
+    margin: 15%;
+    position: relative;
+}
+
+.staffLine {
+    padding: 3px;
+}
+
+.note {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    height: 20px;
+    width: 20px;
+    background-color: #000000;
+    border-radius: 50%;
+    display: none;
 }
