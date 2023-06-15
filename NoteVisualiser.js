@@ -8,11 +8,19 @@ class NoteVisualiser {
      */
     static createNote(midiMessage) {
         const staff = document.getElementById("staffContainer");
+        const noteContainer =  document.createElement("div");
         const note = document.createElement("div");
         const noteName = AudioStream.noteValues[midiMessage.getNote()];
+
         this.styleNote(noteName, note);
-        staff.appendChild(note);
-        notes.set(noteName, note);
+        noteContainer.id = noteName;
+        note.id = noteContainer.id + "--note";
+        this.addAccidentals(noteContainer, note);
+
+        noteContainer.appendChild(note);
+        staff.appendChild(noteContainer);
+
+        notes.set(noteName, noteContainer);
     }
 
     /**
@@ -29,7 +37,6 @@ class NoteVisualiser {
         note.style.width = "20px";
         note.style.backgroundColor = "black";
         note.style.borderRadius = "50%";
-        note.id = noteName;
     }
 
     /**
@@ -133,7 +140,7 @@ class NoteVisualiser {
                 if (notes.has("D")) {
                     left = "54%";
                 }
-                if (notes.has("Eb")) {
+                if (notes.has("D#/Eb")) {
                     left = "46%";
                 }
                 break;
@@ -168,6 +175,55 @@ class NoteVisualiser {
                 break;
         }
         return left;
+    }
+
+    /**
+     * Determines what accidental gets added to a note.
+     * @param {HTML DOM Element} noteContainer 
+     * @param {HTML DOM Element} note 
+     */
+    static addAccidentals(noteContainer, note) {
+        switch(noteContainer.id) {
+            case "C#/Db": case "F#/Gb":
+                this.insertAccidental(noteContainer, note, "♯");
+                break;
+            case "D#/Eb": case "G#/Ab": case "A#/Bb":
+                this.insertAccidental(noteContainer, note, "♭");
+                break;
+        }
+    }
+
+    /**
+     * Adds the given accidental to the note.
+     * @param {HTML DOM Element} noteContainer 
+     * @param {HTML DOM Element} note 
+     * @param {String} accidental 
+     */
+    static insertAccidental(noteContainer, note, accidental) {
+        const accidentalContainer = document.createElement("div");
+        const accidentalText = document.createElement("p");
+        const symbol = document.createTextNode(accidental);
+
+        accidentalContainer.id = noteContainer.id + "--accidental";
+        this.positionAccidental(note, accidentalContainer);
+
+        accidentalText.appendChild(symbol);
+        accidentalContainer.appendChild(accidentalText);
+        noteContainer.appendChild(accidentalContainer);
+    }
+
+    /**
+     * Positions the accidental.
+     * @param {HTML DOM Element} note 
+     * @param {HTML DOM Element} accidentalContainer 
+     */
+    static positionAccidental(note, accidentalContainer) {
+        const top = parseInt(note.style.top) - 18 + "%";
+        const left = parseInt(note.style.left) + 2 + "%"
+
+        accidentalContainer.style.position = "absolute";
+        accidentalContainer.style.top = top;
+        accidentalContainer.style.left = left;
     }
 
     /**
