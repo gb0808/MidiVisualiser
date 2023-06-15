@@ -39,6 +39,7 @@ function parseInput(input) {
     if (message.checkNoteStatus()) {
         AudioStream.startSound(message);
         NoteVisualiser.createNote(message);
+        console.log(AudioStream.noteValues[message.getNote()]);
     } else {
         AudioStream.stopSound(message);
         NoteVisualiser.removeNote(message);
