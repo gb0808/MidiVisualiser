@@ -1,59 +1,81 @@
+const notes = new Map();
+
 class NoteVisualiser {
 
     /**
-     * Shows the note that is being played by the MIDI keyboard.
-     * @param {MIDIMessage} midiMessage - The message recived from the MIDI keyboard.
+     * Creates a note on the staff.
+     * @param {MIDIMessage} midiMessage - MIDI data taken from the user.
      */
-    static showNote(midiMessage) {
-        const noteIcon = document.getElementById("note");
+    static createNote(midiMessage) {
+        const staff = document.getElementById("staffContainer");
+        const note = document.createElement("div");
         const noteName = AudioStream.noteValues[midiMessage.getNote()];
-        noteIcon.style.display = "block";
+        this.styleNote(noteName, note);
+        staff.appendChild(note);
+        notes.set(noteName, note);
+    }
 
+    /**
+     * Applies CSS to the note being created.
+     * @param {String} noteName - the name of the note being played.
+     * @param {HTML DOM Element} note - an HTML element acting as the note on a staff.
+     */
+    static styleNote(noteName, note) {
+        note.style.position = "absolute";
+        note.style.top = this.getTopPosition(noteName);
+        note.style.left = "50%";
+        note.style.height = "20px";
+        note.style.width = "20px";
+        note.style.backgroundColor = "black";
+        note.style.borderRadius = "50%";
+        note.id = noteName;
+    }
+
+    /**
+     * Puts a note on the proper line or space on the staff.
+     * @param {String} noteName - the name of the note being played.
+     * @returns the CSS top value.
+     */
+    static getTopPosition(noteName) {
         switch (noteName) {
             case "A":
-                noteIcon.style.top = "51%";
-                break;
+                return "51%";
             case "A#/Bb":
-                noteIcon.style.top = "44%";
-                break;
+                return "44%";
             case "B":
-                noteIcon.style.top = "44%";
-                break;
+                return "44%";
             case "C":
-                noteIcon.style.top = "36%";
-                break;
+                return "36%";
             case "C#/Db":
-                noteIcon.style.top = "36%";
-                break;
+                return "36%";
             case "D":
-                noteIcon.style.top = "28%";
-                break;
+                return "28%";
             case "D#/Eb":
-                noteIcon.style.top = "21%";
-                break;
+                return "21%";
             case "E":
-                noteIcon.style.top = "21%";
-                break;
+                return "21%";
             case "F":
-                noteIcon.style.top = "66%";
-                break;
+                return "66%";
             case "F#/Gb":
-                noteIcon.style.top = "66%";
-                break;
+                return "66%";
             case "G":
-                noteIcon.style.top = "59%";
-                break;
+                return "59%";
             case "G#/Ab":
-                noteIcon.style.top = "51%";
-                break;
+                return "51%";
+            default:
+                return null;
         }
     }
 
     /**
-     * Hides any notes being displayed
+     * Removes a note from the staff.
+     * @param {MIDIMessage} midiMessage - MIDI data taken from the user.
      */
-    static hideNote() {
-        const noteIcon = document.getElementById("note");
-        noteIcon.style.display = "none";
+    static removeNote(midiMessage) {
+        const noteName = AudioStream.noteValues[midiMessage.getNote()];
+        if (notes.has(noteName)) {
+            notes.get(noteName).remove();
+            notes.delete(noteName);
+        }
     }
 }

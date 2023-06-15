@@ -40,10 +40,10 @@ function parseInput(input) {
     if (message.checkNoteStatus()) {
         AudioStream.startSound(message);
         midiIcon.style.backgroundColor = "aqua";
-        NoteVisualiser.showNote(message);
+        NoteVisualiser.createNote(message);
     } else {
         AudioStream.stopSound(message);
         midiIcon.style.backgroundColor = "white";
-        NoteVisualiser.hideNote();
+        NoteVisualiser.removeNote(message);
     }
 }

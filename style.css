@@ -23,14 +23,3 @@
 .staffLine {
     padding: 3px;
 }
-
-.note {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    height: 20px;
-    width: 20px;
-    background-color: #000000;
-    border-radius: 50%;
-    display: none;
-}
