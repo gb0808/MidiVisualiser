@@ -47,30 +47,40 @@ class NoteVisualiser {
      */
     static getTopPosition(noteName) {
         switch (noteName) {
-            case "A":
-                return "51%";
-            case "A#/Bb":
-                return "44%";
-            case "B":
-                return "44%";
-            case "C":
-                return "36%";
-            case "C#/Db":
-                return "36%";
-            case "D":
-                return "28%";
-            case "D#/Eb":
-                return "21%";
-            case "E":
-                return "21%";
-            case "F":
+            case "C4":
+                return "88%";
+            case "C#/Db4":
+                return "88%";
+            case "D4":
+                return "82%";
+            case "D#/Eb4":
+                return "74%";
+            case "E4":
+                return "74%";
+            case "F4":
                 return "66%";
-            case "F#/Gb":
+            case "F#/Gb4":
                 return "66%";
-            case "G":
+            case "G4":
                 return "59%";
-            case "G#/Ab":
+            case "G#/Ab4":
                 return "51%";
+            case "A4":
+                return "51%";
+            case "A#/Bb4":
+                return "44%";
+            case "B4":
+                return "44%";
+            case "C5":
+                return "36%";
+            case "C#/Db5":
+                return "36%";
+            case "D5":
+                return "28%";
+            case "D#/Eb5":
+                return "21%";
+            case "E5":
+                return "21%";
         }
     }
 
@@ -82,7 +92,7 @@ class NoteVisualiser {
      */
     static getLeftPosition(noteName) {
         let left = "50%";
-        switch (noteName) {
+        switch (noteName.substring(0, noteName.length - 1)) {
             case "A":
                 if (notes.has("A#/Bb") || notes.has("G") || notes.has("B")) {
                     left = "54%";
@@ -183,7 +193,7 @@ class NoteVisualiser {
      * @param {HTML DOM Element} note 
      */
     static addAccidentals(noteContainer, note) {
-        switch(noteContainer.id) {
+        switch(noteContainer.id.substring(0, noteContainer.id.length - 1)) {
             case "C#/Db": case "F#/Gb":
                 this.insertAccidental(noteContainer, note, "♯");
                 break;

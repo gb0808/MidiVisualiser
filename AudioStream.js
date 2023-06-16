@@ -39,6 +39,7 @@ class AudioStream {
                     temp.push("B" + octave);
                     break;
                 case 3:
+                    octave++;
                     temp.push("C" + octave);
                     break;
                 case 4:
@@ -64,7 +65,6 @@ class AudioStream {
                     break;
                 case 11:
                     temp.push("G#/Ab" + octave);
-                    octave++;
                     break;
             }
         }
