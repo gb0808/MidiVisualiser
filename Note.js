@@ -3,11 +3,20 @@ class Note {
     #noteName;
     #noteContainer;
     #noteTopPosition = {
-        "C4": "88%", "C#/Db4": "88%", "D4": "82%", "D#/Eb4": "74%", "E4": "74%", "F4": "66%", 
-        "F#/Gb4": "66%", "G4": "59%", "G#/Ab4": "51%", "A4": "51%", "A#/Bb4": "44%", "B4": "44%",
-        "C5": "36%", "C#/Db5": "36%", "D5": "28%", "D#/Eb5": "21%", "E5": "21%",
+        "E2": "93%", "F2": "90%", "F#/Gb2": "90%", "G2": "86%", "G#/Ab2": "82%", "A2": "82%",
+        "A#/Bb2": "78%", "B2": "78%", "C3": "74%", "C#/Db3": "74%", "D3": "69.5%", 
+        "D#/Eb3": "65.5%", "E3": "65.5%", "F3": "61.5%", "F#/Gb3": "61.5%", "G3": "57.5%", 
+        "G#/Ab3": "53.5%", "A3": "53.5%", "A#/Bb3": "50%", "B3": "50%", "C4": "46.5%", 
+        "C#/Db4": "46.5%", "D4": "43.5%", "D#/Eb4": "40%", "E4": "40%", "F4": "35.5%", 
+        "F#/Gb4": "35.5%", "G4": "31.5%", "G#/Ab4": "27.5%", "A4": "27.5%", "A#/Bb4": "23.5%", 
+        "B4": "23.5%", "C5": "19.5%", "C#/Db5": "19.5%", "D5": "15.5%", "D#/Eb5": "11.5%", 
+        "E5": "11.5%", "F5": "7.5%", "F#/Gb5": "7.5%", "G5": "3.5%", "G#/Ab5": "0.5%", "A5": "0.5%",
     }   
 
+    /**
+     * @constructor
+     * @param {String} noteName - the note letter name with octave number.
+     */
     constructor(noteName) {
         this.#noteName = noteName;
         this.#noteContainer = document.createElement("div");
@@ -15,6 +24,9 @@ class Note {
         this.#createDomElement();
     }
 
+    /**
+     * Creates an HTML element to display the note.
+     */
     #createDomElement() {
         const staff = document.getElementById("staffContainer");
 
@@ -53,6 +65,10 @@ class Note {
         noteGraphic.style.borderRadius = "50%";
     }
 
+    /**
+     * Determines what accidental to place on a note.
+     * @returns The appropriate accidental.
+     */
     #getAccidentalType() {
         switch (this.#noteName.substring(0, this.#noteName.length - 1)) {
             case "C#/Db": case "F#/Gb":
@@ -64,8 +80,13 @@ class Note {
         }
     }
     
+    /**
+     * Positions the accidental on the note head.
+     * @param {HTML DOM Element} note - a div containing the note head on screen.
+     * @param {HTML DOM Element} accidentalContainer - a div containing the accidental mark.
+     */
     #positionAccidental(note, accidentalContainer) {
-        const top = parseInt(note.style.top) - 18 + "%";
+        const top = parseInt(note.style.top) - 10 + "%";
         const left = parseInt(note.style.left) + 2 + "%"
 
         accidentalContainer.style.position = "absolute";
@@ -73,6 +94,9 @@ class Note {
         accidentalContainer.style.left = left;
     }
 
+    /**
+     * Removes a note from the staff.
+     */
     removeNote() {
         this.#noteContainer.remove();
     }
