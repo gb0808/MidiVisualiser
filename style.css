@@ -23,3 +23,19 @@
 .staffLine {
     padding: 3px;
 }
+
+#trebleClef {
+    position: absolute;
+    top: 0%;
+    left: 2%;
+    height: 170px;
+    width: 100px;
+}
+
+#bassClef {
+    position: absolute;
+    top: 55%;
+    left: 5%;
+    height: 100px;
+    width: 70px;
+}
