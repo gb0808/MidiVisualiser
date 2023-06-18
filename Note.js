@@ -72,25 +72,31 @@ class Note {
         noteGraphic.style.width = "20px";
         noteGraphic.style.backgroundColor = "black";
         noteGraphic.style.borderRadius = "50%";
-        switch(this.#ledgerLineType) {
+        this.#addLedgerLine(noteGraphic);
+    }
+
+    /**
+     * Adds a ledger line to thenote.
+     * @private
+     * @param {HTML DOM Element} noteGraphic - an HTML element acting as the note on a staff.
+     */
+    #addLedgerLine(noteGraphic) {
+        const ledgerLine = document.createElement("hr");
+        ledgerLine.style.border = "1px solid black";
+        ledgerLine.style.position = "absolute";
+        switch (this.#ledgerLineType) {
+            case "top":
+                ledgerLine.style.top = parseInt(noteGraphic.style.top) - 2 + "%"
+                break;
             case "middle":
-                this.#addMiddleLedgerLine(noteGraphic);
+                ledgerLine.style.top = noteGraphic.style.top;
+                break;
+            case "bottom":
+                ledgerLine.style.top = parseInt(noteGraphic.style.top) + 4 + "%"
                 break;
             default:
                 break;
         }
-    }
-
-    /**
-     * Adds a ledger line going through the middle of a note.
-     * @private
-     * @param {HTML DOM Element} noteGraphic - an HTML element acting as the note on a staff.
-     */
-    #addMiddleLedgerLine(noteGraphic) {
-        const ledgerLine = document.createElement("hr");
-        ledgerLine.style.border = "1px solid black";
-        ledgerLine.style.position = "absolute";
-        ledgerLine.style.top = noteGraphic.style.top;
         ledgerLine.style.left = parseInt(noteGraphic.style.left) - 0.75 + "%";
         ledgerLine.style.width = "33px";
         this.#noteContainer.appendChild(ledgerLine);
