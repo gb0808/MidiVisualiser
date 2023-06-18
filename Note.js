@@ -2,6 +2,7 @@ class Note {
 
     #noteName;
     #noteContainer;
+    #ledgerLineType;
     #noteTopPosition = {
         "E2": "93%", "F2": "90%", "F#/Gb2": "90%", "G2": "86%", "G#/Ab2": "82%", "A2": "82%",
         "A#/Bb2": "78%", "B2": "78%", "C3": "74%", "C#/Db3": "74%", "D3": "69.5%", 
@@ -19,6 +20,14 @@ class Note {
      */
     constructor(noteName) {
         this.#noteName = noteName;
+        switch(noteName) {
+            case "E2": case "C4": case "G#/Ab5": case "A5":
+                this.#ledgerLineType = "middle";
+                break;
+            default:
+                this.#ledgerLineType = "none";
+                break;
+        }
         this.#noteContainer = document.createElement("div");
         this.#noteContainer.id = this.#noteName;
         this.#createDomElement();
@@ -63,6 +72,28 @@ class Note {
         noteGraphic.style.width = "20px";
         noteGraphic.style.backgroundColor = "black";
         noteGraphic.style.borderRadius = "50%";
+        switch(this.#ledgerLineType) {
+            case "middle":
+                this.#addMiddleLedgerLine(noteGraphic);
+                break;
+            default:
+                break;
+        }
+    }
+
+    /**
+     * Adds a ledger line going through the middle of a note.
+     * @private
+     * @param {HTML DOM Element} noteGraphic - an HTML element acting as the note on a staff.
+     */
+    #addMiddleLedgerLine(noteGraphic) {
+        const ledgerLine = document.createElement("hr");
+        ledgerLine.style.border = "1px solid black";
+        ledgerLine.style.position = "absolute";
+        ledgerLine.style.top = noteGraphic.style.top;
+        ledgerLine.style.left = parseInt(noteGraphic.style.left) - 0.75 + "%";
+        ledgerLine.style.width = "33px";
+        this.#noteContainer.appendChild(ledgerLine);
     }
 
     /**
