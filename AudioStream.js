@@ -30,41 +30,41 @@ class AudioStream {
         for (let i = 0; i < this.noteFrequencies.length - 20; i++) {
             switch (i % 12) {
                 case 0:
-                    temp.push("A" + octave);
+                    temp.push("A/" + octave);
                     break;
                 case 1:
-                    temp.push("A#/Bb" + octave);
+                    temp.push("Bb/" + octave);
                     break;
                 case 2:
-                    temp.push("B" + octave);
+                    temp.push("B/" + octave);
                     break;
                 case 3:
                     octave++;
-                    temp.push("C" + octave);
+                    temp.push("C/" + octave);
                     break;
                 case 4:
-                    temp.push("C#/Db" + octave);
+                    temp.push("C#/" + octave);
                     break;
                 case 5:
-                    temp.push("D" + octave);
+                    temp.push("D/" + octave);
                     break;
                 case 6:
-                    temp.push("D#/Eb" + octave);
+                    temp.push("Eb/" + octave);
                     break;
                 case 7:
-                    temp.push("E" + octave);
+                    temp.push("E/" + octave);
                     break;
                 case 8:
-                    temp.push("F" + octave);
+                    temp.push("F/" + octave);
                     break;
                 case 9:
-                    temp.push("F#/Gb" + octave);
+                    temp.push("F#/" + octave);
                     break;
                 case 10:
-                    temp.push("G" + octave);
+                    temp.push("G/" + octave);
                     break;
                 case 11:
-                    temp.push("G#/Ab" + octave);
+                    temp.push("Ab/" + octave);
                     break;
             }
         }

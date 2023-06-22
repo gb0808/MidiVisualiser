@@ -8,8 +8,9 @@ class NoteVisualiser {
      */
     static createNote(midiMessage) {
         const noteName = AudioStream.noteValues[midiMessage.getNote()];
-        const noteContainer = new Note(noteName);
-        notes.set(noteName, noteContainer);
+        const note = new Note(noteName);
+        note.showNote();
+        notes.set(noteName, note);
     }
     /**
      * Removes a note from the staff.
